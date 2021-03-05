@@ -7,6 +7,7 @@ const bcrypt = require("bcryptjs")
 const passport = require("passport")
 const nodemailer = require("nodemailer");
 
+
 router.get("/usuarios/registro", (req, res) => {
     res.render("usuarios/registro")
 })

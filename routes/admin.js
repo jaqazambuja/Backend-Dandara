@@ -11,7 +11,11 @@
     const Servico = mongoose.model('servicos')
     const {eAdmin} = require("../helpers/eAdmin")
     const multer = require('multer')
+    const cors = require('cors');
 
+
+    app.use(cors())
+    
     const storage = multer.diskStorage({
         destination: function(req,res,cb){
             cb(null,"uploads/")
