@@ -58,7 +58,7 @@
 
 
 //Rotas
-    
+app.use(cors())
     //rota adminitrativa
     app.use('/admin',admin)
     app.use("/usuarios", usuarios)

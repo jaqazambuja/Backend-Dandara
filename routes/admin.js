@@ -14,8 +14,8 @@
     const cors = require('cors');
 
 
-    app.use(cors())
     
+
     const storage = multer.diskStorage({
         destination: function(req,res,cb){
             cb(null,"uploads/")
@@ -29,7 +29,7 @@
     const upload = multer({storage})
 
 //Rotas do Admin
-    
+app.use(cors())
     //Rota index, apenas para testes
         router.get('/', (req,res) => {
             res.render("admin/index")
