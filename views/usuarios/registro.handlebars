@@ -1,0 +1,25 @@
+{{#each erros}}
+    {{texto}}
+{{else}}
+
+{{/each}}
+
+<form action="/usuarios/registro" method="post">
+    <label for="UserName">Username: </label>
+        <input type="text" name="username" class="form-control" required>
+     <label for="nome">Nome: </label>
+        <input type="text" name="nome" class="form-control" required>
+    <label for="cpf">CPF: </label>
+        <input type="number" name="cpf" class="form-control" required>
+    <label for="numnis">Número do Nis: </label>
+        <input type="number" name="numnis" class="form-control" required>
+     <label for="celular">Celular:: </label>
+        <input type="number" name="celular" class="form-control" required>
+    <label for="email">Email:</label>   
+        <input type="email" name="email" class="form-control" required>
+    <label for="senha">Senha: </label>
+        <input type="password" name="senha" class="form-control" required>
+    <label for="senha2">Repita a sua senha: </label>
+        <input type="password" name="senha2" class="form-control" >
+    <button type="submit" class="btn btn-sucess">Criar conta</button>
+</form>
