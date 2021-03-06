@@ -11,7 +11,7 @@
     const Servico = mongoose.model('servicos')
     const {eAdmin} = require("../helpers/eAdmin")
     const multer = require('multer')
-    const cors = require('cors');
+
 
 
     
@@ -29,8 +29,8 @@
     const upload = multer({storage})
 
 //Rotas do Admin
-app.use(cors({origin: "https://dandara-projeto.netlify.app/", 
-credentials: true}))
+//app.use(cors({origin: "https://dandara-projeto.netlify.app/", 
+//credentials: true}))
     //Rota index, apenas para testes
         router.get('/', (req,res) => {
             res.render("admin/index")

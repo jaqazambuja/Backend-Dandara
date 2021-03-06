@@ -43,11 +43,10 @@
     app.engine('handlebars', handlebars({defaultLayout:'main'}))
     app.set('view engine', 'handlebars')
     //Body-parser
-    app.use(bodyParser.urlencoded({extended:true}))
+    app.use(bodyParser.urlencoded({extended:false}))
     app.use(bodyParser.json())
     //Cors
-    app.use(cors({origin: "https://dandara-projeto.netlify.app/", 
-                credentials: true}))
+    app.use(cors())
     //Mongoose
     mongoose.Promise = global.Promise;
     mongoose.connect(`mongodb+srv://deploy:dandara123recode@cluster0.j9esr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`).then(() =>{
