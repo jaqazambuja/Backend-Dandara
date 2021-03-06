@@ -46,7 +46,8 @@
     app.use(bodyParser.urlencoded({extended:true}))
     app.use(bodyParser.json())
     //Cors
-    app.use(cors())
+    app.use(cors({origin: "https://dandara-projeto.netlify.app/", 
+                credentials: true}))
     //Mongoose
     mongoose.Promise = global.Promise;
     mongoose.connect(`mongodb+srv://deploy:dandara123recode@cluster0.j9esr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`).then(() =>{
