@@ -29,7 +29,8 @@
     const upload = multer({storage})
 
 //Rotas do Admin
-app.use(cors())
+app.use(cors({origin: "https://dandara-projeto.netlify.app/", 
+credentials: true}))
     //Rota index, apenas para testes
         router.get('/', (req,res) => {
             res.render("admin/index")
