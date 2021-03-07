@@ -8,8 +8,11 @@ const passport = require("passport")
 const nodemailer = require("nodemailer");
 
 
-router.get("/registro", (req, res) => {
-    res.render("usuarios/registro")
+router.get("/registro", async (req, res) => {   
+    const usuariosResponse = await Usuario.find()
+    const usuariosResponse = await usuariosResponse
+
+    return res.json(usuariosJson)
 })
 
 
