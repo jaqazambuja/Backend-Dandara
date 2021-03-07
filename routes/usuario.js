@@ -13,7 +13,7 @@ router.get("/registro", (req, res) => {
 })
 
 
-router.post("/usuarios/registro", (req,res) => {
+router.post("/registro", (req,res) => {
     var erros = []
 
     if(!req.body.nome || typeof req.body.nome == undefined || req.body.nome ==null){
