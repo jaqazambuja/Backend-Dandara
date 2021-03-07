@@ -113,7 +113,7 @@ app.use(cors())
     })
 
     app.use('/admin', admin)
-
+    app.use("/usuarios", usuarios)
 //informação da porta do servidor
 const PORT = process.env.PORT 
 app.listen(PORT, function(){

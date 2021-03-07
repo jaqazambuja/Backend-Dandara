@@ -9,7 +9,7 @@ const nodemailer = require("nodemailer");
 
 
 router.get("/registro", (req, res) => {
-    res.render("/usuarios/registro")
+    res.render("usuarios/registro")
 })
 
 
