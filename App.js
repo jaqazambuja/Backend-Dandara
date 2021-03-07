@@ -115,7 +115,7 @@ app.use(cors())
     app.use('/admin', admin)
 
 //informação da porta do servidor
-const PORT = process.env.PORT 
+const PORT = process.env.PORT || 3050 
 app.listen(PORT, function(){
     console.log(`Servidor rodando!`)
 })

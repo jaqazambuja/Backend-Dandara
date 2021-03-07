@@ -8,12 +8,12 @@ const passport = require("passport")
 const nodemailer = require("nodemailer");
 
 
-router.get("/usuarios/registro", (req, res) => {
-    res.render("usuarios/registro")
+router.get("/registro", (req, res) => {
+    res.render("https://dandara-palmares.netlify.app/cadastrese")
 })
 
 
-router.post("/usuarios/registro", (req,res) => {
+router.post("/registro", (req,res) => {
     var erros = []
 
     if(!req.body.nome || typeof req.body.nome == undefined || req.body.nome ==null){
@@ -38,14 +38,14 @@ router.post("/usuarios/registro", (req,res) => {
 
     if(erros.length > 0){
 
-        res.render("usuarios/registro", {erros: erros})
+        res.render("https://dandara-palmares.netlify.app/cadastrese", {erros: erros})
 
     }else{
 
         Usuario.findOne({email: req.body.username}).then((usuario) => {
             if(usuario){
                 req.flash("error_msg", "Já existe uma conta com este username no nosso sistema")
-                res.redirect("/usuarios/registro")
+                res.redirect("https://dandara-palmares.netlify.app/cadastrese")
             }else{
 
                 const novoUsuario = new Usuario({
@@ -64,14 +64,14 @@ router.post("/usuarios/registro", (req,res) => {
                     bcrypt.hash(novoUsuario.senha, salt, (erro, hash) => {
                         if(erro){
                             req.flash("erro_msg", "Houve um erro durante o salvamento do usuário")
-                            res.redirect("/")
+                            res.redirect("https://dandara-palmares.netlify.app/")
                         }
 
                         novoUsuario.senha = hash
 
                         novoUsuario.save().then(() =>{
                             req.flash("sucess_msg", "Usuário criado com sucesso!")
-                            res.redirect("/localhost:3000/login")
+                            res.redirect("https://dandara-palmares.netlify.app/login")
                         }).catch((err) => {
                             req.flash("error_msg", "Houve um erro ao criar o usuario, tente novamente!")
                             res.redirect("/usuarios/registro")
@@ -108,14 +108,14 @@ router.post("/usuarios/registro", (req,res) => {
 })
 
 router.get("/login", (req,res) => {
-    res.render("usuarios/login")
+    res.render("https://dandara-palmares.netlify.app/login")
 })
 //sistema de login
 router.post("/login", (req,res,next) => {
 //quando autenticado mostra para onde o usuário de ser redirecionado
     passport.authenticate("local", {
-        successRedirect: "http://localhost:3000/minhaconta",
-        failureRedirect: "http://localhost:3000/login",
+        successRedirect: "https://dandara-palmares.netlify.app/minhaconta",
+        failureRedirect: "https://dandara-palmares.netlify.app/cadastrese",
         failureFlash: false
     })(req,res,next)
     console.log("logado!")
