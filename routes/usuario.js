@@ -9,7 +9,7 @@ const nodemailer = require("nodemailer");
 
 
 router.get("/registro", (req, res) => {
-    res.render("https://dandara-palmares.netlify.app/cadastrese")
+    res.render("/usuarios/registro")
 })
 
 
