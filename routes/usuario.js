@@ -113,6 +113,11 @@ router.post("/registro",(req,res) => {
 */
 
 
+router.get("/login", (req,res) => {
+    res.render("usuarios/login")
+})
+
+
 //sistema de login
 router.post("/login", (req,res,next) => {
 //quando autenticado mostra para onde o usuário de ser redirecionado
@@ -120,7 +125,8 @@ router.post("/login", (req,res,next) => {
         successRedirect: "https://dandara-palmares.netlify.app/minhaconta",
         failureRedirect: "https://dandara-palmares.netlify.app/cadastrese",
         failureFlash: false
-    })
+    })(req,res,next)
+    console.log("logado!")
 })
 
 //Sistema de logout 
