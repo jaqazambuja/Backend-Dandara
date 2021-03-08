@@ -8,15 +8,12 @@ const passport = require("passport")
 const nodemailer = require("nodemailer");
 
 
-router.get("/registro", async (req, res) => {   
-    const usuariosResponse = await Usuario.find()
-    const usuariosResponse = await usuariosResponse
-
-    return res.json(usuariosJson)
+router.get("/registro", (req, res) => {   
+    res.render("usuarios/registro")
 })
 
 
-router.post("/registro", (req,res) => {
+router.post("/registro",(req,res) => {
     var erros = []
 
     if(!req.body.nome || typeof req.body.nome == undefined || req.body.nome ==null){
@@ -77,7 +74,7 @@ router.post("/registro", (req,res) => {
                             res.redirect("https://dandara-palmares.netlify.app/login")
                         }).catch((err) => {
                             req.flash("error_msg", "Houve um erro ao criar o usuario, tente novamente!")
-                            res.redirect("/usuarios/registro")
+                            res.redirect("https://dandara-palmares.netlify.app/")
                         })
                     })
                 })
@@ -111,8 +108,10 @@ router.post("/registro", (req,res) => {
 })
 
 router.get("/login", (req,res) => {
-    res.render("https://dandara-palmares.netlify.app/login")
+    res.render("usuarios/login")
 })
+
+
 //sistema de login
 router.post("/login", (req,res,next) => {
 //quando autenticado mostra para onde o usuário de ser redirecionado

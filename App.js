@@ -1,10 +1,12 @@
 //Carregando Modulos
     const express = require('express')
     const bodyParser = require('body-parser')
+
     //const Produto = require('./models/Produto')
     const handlebars = require('express-handlebars');
     const cors = require('cors');
     const mongoose = require("mongoose");
+
     //const { post } = require('./Config/Server');
     const app = express();
     const admin = require("./routes/admin")
@@ -17,10 +19,11 @@
     const Produto = mongoose.model('produtos');
     const db = require("./config/db")
     require("./models/servicos")
-    
+    const cookieParser = require('cookie-parser');
+    const path = require('path');
     const Servico = mongoose.model("servicos")
 
-//Configurações
+    //Configurações
     //Sessão
     app.use(session({
         secret: "dandara",
@@ -30,6 +33,7 @@
     app.use(passport.initialize())
     app.use(passport.session())
     app.use(flash())
+    
     //Middleware
     app.use((req,res, next) => {
         res.locals.success_msg = req.flash("success_msg")
@@ -42,11 +46,21 @@
     //Handlebars
     app.engine('handlebars', handlebars({defaultLayout:'main'}))
     app.set('view engine', 'handlebars')
+    
+    //cookie-parser
+    app.use(cookieParser());
+
     //Body-parser
     app.use(bodyParser.urlencoded({extended:false}))
     app.use(bodyParser.json())
+    
     //Cors
     app.use(cors())
+    
+    //json
+
+    app.use(express.json());
+
     //Mongoose
     mongoose.Promise = global.Promise;
     mongoose.connect(`mongodb+srv://deploy:dandara123recode@cluster0.j9esr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`).then(() =>{
@@ -55,13 +69,14 @@
         console.log("Erro ao se conectar ao Mongo: " +err)
     })
 
+    //Rotas
+    app.use(cors())
 
-
-//Rotas
-app.use(cors())
     //rota adminitrativa
     app.use('/admin',admin)
     app.use("/usuarios", usuarios)
+
+
 
      //retorno dos dados em Json
      app.get("/produtos", async (req,res) => {
@@ -80,7 +95,6 @@ app.use(cors())
     
     })
 
-    
     //deletando produto   
     app.get('/delete/:id', function(req,res){
     Produto.destroy({where: {'id': req.params.id}}).then(function(){
@@ -114,8 +128,9 @@ app.use(cors())
 
     app.use('/admin', admin)
     app.use("/usuarios", usuarios)
-//informação da porta do servidor
-const PORT = process.env.PORT 
-app.listen(PORT, function(){
+    
+    //informação da porta do servidor
+    const PORT = process.env.PORT || 3050
+    app.listen(PORT, function(){
     console.log(`Servidor rodando!`)
 })

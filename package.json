@@ -9,6 +9,7 @@
     "commonjs": "^0.0.1",
     "connect-flash": "^0.1.1",
     "consign": "^0.1.6",
+    "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-handlebars": "^5.2.1",
@@ -22,12 +23,14 @@
     "nodemon": "^2.0.7",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
+    "path": "^0.12.7",
     "sequelize": "^6.5.0"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node App.js"
+    "start": "node App.js",
+    "dev": "nodemon App.js"
   },
   "author": "",
   "license": "ISC"
