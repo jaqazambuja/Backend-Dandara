@@ -107,20 +107,20 @@ router.post("/registro",(req,res) => {
 
 })
 
-router.get("/login", (req,res) => {
+/*router.get("/login", (req,res) => {
     res.render("usuarios/login")
 })
+*/
 
 
 //sistema de login
 router.post("/login", (req,res,next) => {
 //quando autenticado mostra para onde o usuário de ser redirecionado
-    /*passport.authenticate("local", {
+    passport.authenticate("local", {
         successRedirect: "https://dandara-palmares.netlify.app/minhaconta",
         failureRedirect: "https://dandara-palmares.netlify.app/cadastrese",
         failureFlash: false
-    })*/
-    return res.json({message: 'login feito com sucesso'})
+    })
 })
 
 //Sistema de logout 
