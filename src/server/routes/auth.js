@@ -32,7 +32,7 @@ module.exports = app => {
                     secure: false
                 })
                 .status(200)
-                .redirect("http://localhost:3000/minhaconta")
+                .redirect("https://dandara-palmares.netlify.app/minhaconta")
             })(req, res, next)
     })
     
@@ -48,7 +48,7 @@ module.exports = app => {
                         return res.status(400).json({ error: "User already exists!" })
                     }
         
-                    return res.redirect("http://localhost:3000/minhaconta")
+                    return res.redirect("https://dandara-palmares.netlify.app/minhaconta")
                     
                 })
             })
