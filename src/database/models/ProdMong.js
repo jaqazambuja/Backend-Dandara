@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const Produto = new Schema({
     username:{
         type: Schema.Types.ObjectId,
-        ref: "usuarios",
+        ref: "User",
         required: true
     },
 

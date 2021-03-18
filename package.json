@@ -4,6 +4,7 @@
   "description": "",
   "main": "App.js",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "commonjs": "^0.0.1",
@@ -11,26 +12,32 @@
     "consign": "^0.1.6",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-handlebars": "^5.2.1",
     "express-session": "^1.17.1",
+    "jsonwebtoken": "^8.5.1",
     "mongo": "^0.1.0",
     "mongoose": "^5.11.16",
+    "morgan": "^1.10.0",
     "multer": "^1.4.2",
     "mysql": "^2.18.1",
     "mysql2": "^2.2.5",
     "nodemailer": "^6.5.0",
     "nodemon": "^2.0.7",
     "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
     "sequelize": "^6.5.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "dotenv": "^8.2.0",
+    "morgan": "^1.10.0"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node App.js",
-    "dev": "nodemon App.js"
+    "dev": "nodemon -r dotenv/config ./src/app.js",
+    "start": "node ./src/app.js"
   },
   "author": "",
   "license": "ISC"

@@ -1,27 +1,40 @@
-//Carregando Modulos
-    const express = require('express')
-    const bodyParser = require('body-parser')
+const app = require('express')()
+const consign = require('consign')
 
+//carregando modulos
+    const express = require('express')
+    const bodyParser = require('body-parser') 
+    require ('dotenv').config()
     //const Produto = require('./models/Produto')
-    const handlebars = require('express-handlebars');
+    //const handlebars = require('express-handlebars');
     const cors = require('cors');
     const mongoose = require("mongoose");
 
     //const { post } = require('./Config/Server');
-    const app = express();
-    const admin = require("./routes/admin")
+    //const app = express();
+    const admin = require("./server/routes/admin")
     const session = require('express-session')
     const flash = require("connect-flash")
-    const usuarios = require("./routes/usuario");
+    //const usuarios = require("./routes/usuario");
     const passport = require('passport');
-    require("./config/auth")(passport)
-    require('./models/ProdMong')
+    //require("./config/auth")(passport)
+    require('./database/models/ProdMong')
     const Produto = mongoose.model('produtos');
-    const db = require("./config/db")
-    require("./models/servicos")
+    //const db = require("./config/db")
+    require("./database/models/servicos")
     const cookieParser = require('cookie-parser');
     const path = require('path');
     const Servico = mongoose.model("servicos")
+    require("./database/models/user")
+    const User = mongoose.model("User")
+    
+
+
+
+    consign({ verbose: true, locale: 'pt-br', cwd: 'src' })
+    .include('middlewares')
+    .then('server')
+    .into(app)
 
     //Configurações
     //Sessão
@@ -43,10 +56,6 @@
         next()
     })
 
-    //Handlebars
-    app.engine('handlebars', handlebars({defaultLayout:'main'}))
-    app.set('view engine', 'handlebars')
-    
     //cookie-parser
     app.use(cookieParser());
 
@@ -57,6 +66,13 @@
     //Cors
     app.use(cors())
     
+
+    app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    next();
+      });
+
     //json
 
     app.use(express.json());
@@ -74,7 +90,7 @@
 
     //rota adminitrativa
     app.use('/admin',admin)
-    app.use("/usuarios", usuarios)
+    //app.use("/usuarios", usuarios)
 
 
 
@@ -127,10 +143,8 @@
     })
 
     app.use('/admin', admin)
-    app.use("/usuarios", usuarios)
-    
-    //informação da porta do servidor
-    const PORT = process.env.PORT 
-    app.listen(PORT, function(){
-    console.log(`Servidor rodando!`)
-})
+ 
+
+
+
+

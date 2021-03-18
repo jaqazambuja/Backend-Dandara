@@ -3,14 +3,14 @@
     const router = express.Router()
     const mongoose = require('mongoose')
     const { createPoolCluster } = require('mysql')
-    require('../models/categorias')
+    require('../../database/models/categorias')
     const Categoria = mongoose.model('categorias')
-    require('../models/ProdMong')
+    require('../../database/models/ProdMong')
     const Produto = mongoose.model('produtos');
-    require('../models/servicos')
+    require('../../database/models/servicos')
     const Servico = mongoose.model('servicos')
-    const {eAdmin} = require("../helpers/eAdmin")
     const multer = require('multer')
+    const cors = require('cors');
 
     const storage = multer.diskStorage({
         destination: function(req,res,cb){
@@ -25,8 +25,9 @@
     const upload = multer({storage})
 
 //Rotas do Admin
-//app.use(cors({origin: "https://dandara-projeto.netlify.app/", 
-//credentials: true}))
+router.use(cors({origin: "http://localhost:3000", 
+credentials: true}))
+
     //Rota index, apenas para testes
         router.get('/', (req,res) => {
             res.render("admin/index")
@@ -49,21 +50,7 @@
     //rota para criar categorias
         router.post('/categorias/nova', (req,res) => {
         
-        /*
-
-        validação de formulário será usado após o termino do Front
-        var erros = []
-
-        if(!req.body.nome || typeof req.body.nome == undefined || req.body.nome == null){
-                erros.push({texto: "Nome inválido"})
-        }
-
-        if(!req.body.slug || typeof req.body.slug == undefined || req.body.slug == null){
-                erros.push({texto: "slug inválido"})
-            }
-        */
-
-
+    
             const novaCategoria ={
                 nome: req.body.nome,
                 slug: req.body.slug
@@ -92,7 +79,7 @@
         })
 
     //Pota para deletar categoria
-        router.delete('/categorias/delete/:id', eAdmin, async(req,res)=>{
+        router.delete('/categorias/delete/:id', async(req,res)=>{
             const{id} = req.params;
             await Categoria.findOneAndDelete({_id:id});
 
@@ -120,13 +107,6 @@
     //Rota para cadastrar Produtos
         router.post("/produtos/cad",upload.single("file"), (req,res) =>{
 
-            /*var erros = []
-            if(req.body.categoria == "0"){
-                erros.push({message: "Categoria invalida, registre uma categoria"})
-            }
-            if(erros.length > 0){
-                console.log({erros:erros})
-            }*/
                 const novoProduto = {
                     username: req.body.username,
                     produto: req.body.produto,
@@ -177,13 +157,6 @@
     //Rota para cadastrar Servicos
     router.post("/servicos/cad",upload.single("file"), (req,res) =>{
 
-        /*var erros = []
-        if(req.body.categoria == "0"){
-            erros.push({message: "Categoria invalida, registre uma categoria"})
-        }
-        if(erros.length > 0){
-            console.log({erros:erros})
-        }*/
             const novoServico = {
                 username: req.body.username,
                 servico: req.body.servico,
@@ -224,4 +197,7 @@
         res.json({message:"servico Deletado"});
     })
 //exportação do modulo
-module.exports = router
+module.exports = app => {
+    app.use('/admin', router)
+}
+

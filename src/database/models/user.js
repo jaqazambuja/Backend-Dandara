@@ -1,7 +1,8 @@
 const mongoose = require('mongoose')
-const Schema = mongoose.Schema
+const bcrypt = require('bcrypt')
 
-const Usuario = new Schema({
+// Model para cadastrar usuarios.
+const userSchema = new mongoose.Schema({
     username: {
         type: String,
         required: true
@@ -26,14 +27,19 @@ const Usuario = new Schema({
         type: String,
         required: true
     },
-    eAdmin: {
-        type: Number, 
-        default: 1
-    },
     senha: {
         type: String,
         required: true
     }
 })
 
-mongoose.model("usuarios", Usuario)
+// Chamei o metodo compare para comparar a senha que o usuario usa quando faz login, com a senha 
+// que foi cadasrada por ele, utilizo esse metodo por conta do hash nas senhas.
+userSchema.method('compare', async (formPass, userPass) => { 
+    return bcrypt.compare(formPass, userPass)
+})
+
+// Model criado
+const User = mongoose.model("User", userSchema)
+
+module.exports = User
