@@ -29,7 +29,7 @@ module.exports = app => {
 
                 res.cookie('jwt', token, { 
                     domain: '.dandara-palmares.netlify.app/',
-                    path: '/',
+                    path: '/minhaconta',
                     httpOnly: false, 
                     secure: false
                 })
