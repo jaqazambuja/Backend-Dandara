@@ -28,6 +28,8 @@ module.exports = app => {
                 const token = jwt.sign({ _id }, secretKey, { expiresIn: '1h' })
 
                 res.cookie('jwt', token, { 
+                    domain: '.dandara-palmares.netlify.app/',
+                    path: '/',
                     httpOnly: false, 
                     secure: false
                 })
@@ -45,7 +47,7 @@ module.exports = app => {
                 await User.create({ username, nome, cpf, numnis, celular, email, senha: hash }, (err, newUser) => { 
                     if (err) { 
                         console.log(err)
-                        return res.status(400).json({ error: "User already exists!" })
+                        return res.status(400).json({ error: "Usuario ja existe" })
                     }
         
                     return res.redirect("https://dandara-palmares.netlify.app/minhaconta")

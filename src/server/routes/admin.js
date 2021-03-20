@@ -25,7 +25,7 @@
     const upload = multer({storage})
 
 //Rotas do Admin
-router.use(cors({origin: "http://localhost:3000", 
+router.use(cors({origin: "https://dandara-palmares.netlify.app/", 
 credentials: true}))
 
     //Rota index, apenas para testes
