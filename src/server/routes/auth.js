@@ -28,8 +28,8 @@ module.exports = app => {
                 const token = jwt.sign({ _id }, secretKey, { expiresIn: '1h' })
 
                 res.cookie('jwt', token, { 
-                    domain: '.dandara-palmares.netlify.app/',
-                    path: '/minhaconta',
+                    domain: 'https://dandara-palmares.netlify.app/',
+                    path: '/',
                     httpOnly: false, 
                     secure: false
                 })
